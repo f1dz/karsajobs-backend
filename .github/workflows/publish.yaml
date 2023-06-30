@@ -29,17 +29,9 @@ jobs:
                 images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
     
           - name: Build the app Docker image with version as tag
-            uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+            uses: docker/build-push-action@v4
             with:
                 context: .
                 push: true
-                tags: ${{ steps.meta.outputs.tags }}
                 labels: ${{ steps.meta.outputs.labels }}
-
-          - name: Build the app Docker image using latest tag
-            uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-            with:
-                context: .
-                push: true
-                tags: latest
-                labels: ${{ steps.meta.outputs.labels }}
+                tags: ${{ steps.meta.outputs.tags }}, latest
