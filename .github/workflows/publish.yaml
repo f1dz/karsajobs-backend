@@ -1,5 +1,5 @@
 name: publish
-on: [release]
+on: [release, push]
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: karsajobs
@@ -33,5 +33,5 @@ jobs:
             with:
                 context: .
                 push: true
-                labels: ${{ steps.meta.outputs.labels }}
+                labels: ${{ github.actor }}/${{ steps.meta.outputs.labels }}
                 tags: ${{ steps.meta.outputs.tags }}, latest
